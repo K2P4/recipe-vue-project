@@ -9,9 +9,9 @@ import FormView from "@/pages/FormView.vue";
 Vue.use(VueRouter);
 
 const routes = [
-	{ path: "/", component: HomeView, name: "home" },
-	{ path: "/recipe/:id", component: DetailView, name: "detail" },
-	{ path: "/recipeform", component: FormView, name: "form" },
+	{ path: "/", component: HomeView, name: "HomeView" },
+	{ path: "/recipe/:id", component: DetailView, name: "DetailView" },
+	{ path: "/recipeform/:id", component: FormView, name: "FormView" },
 ];
 
 const router = new VueRouter({

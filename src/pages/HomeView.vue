@@ -1,51 +1,176 @@
 <!-- @format -->
 
 <template>
-	<div class="">
-		<!-- Navigation -->
-		<div class="border-b mx-5 shadow-sm py-2">
-			<div class="flex items-center justify-between">
-				<img
-					width="50"
-					class="nline-block"
-					src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACUCAMAAAAj+tKkAAAAZlBMVEX///8AAADn5+ebm5vMzMwxMTFzc3ONjY38/Pzw8PDCwsJSUlLz8/P39/eysrJgYGDc3Ny8vLw/Pz8oKChubm7V1dU4ODiioqJYWFhMTEyHh4dHR0epqallZWUjIyMPDw8ZGRl+fn5GcWtUAAAEoklEQVR4nO2ca5eiMAyGEVAKCBQFRC6C//9PrjbloiCMtIXZOXm+7DkOja9tk6YpXU1DEARBEARBEARBEI5NTdOMdbK1jlG8MDukeZIkJzfKLvbWct6hh32163FOnV/UjyQud0Nu5nFrYRzdqkf0PYjiraUxYndc3oPksrW4B+G+E1Sdgihy+/1pbS1P81u3CAqdf0bCQ9J8fPc2laeFTd/dzZfPqdVItDb1Zlo1HjvoqDjiClefh8cuengpaAj0kedIxhXSQTtF6PSS8h6rS58+Fgtrep758HSu+yV3nCq90LEfIwESF6fXGJKGPjhw9GldI8ZY7DkVsYJpSe/74Vfd4J/P664XDRs9SDIqW9/lPPpNDGeinfehzVmu59Dgs7yZQOd/ajbqVwsx89ZsnR4yy8oObpu61OZkWxvaVi60S7tV5jrd8AvidniDwtRZf3nUMbjLRDPBo3g8czIcCu10s2hHYy8plaB5a7DvDcSGRcSYa36uHbvvtXbcuFsuxVV0nquc/cGfSFbvktkvGfHxgo9JKmEekjvYckfHw3GDRVabDO0uHhB5MpB/+K36wnmk8xkcLlfGAa/bSw+sfCLeRO3AWnWTFhE6zNuPfGyG40mGlXHgt5/EUhxIR3Ilm1wI4dUwOHwDuLCijNMQd2Qeo6VJegNWPBH/c5iJUpqiN9huv5pKhuaAVETEwiShaCgkkNErStEf0RpCxPJJeGT58E2dwNtP0qEJjoG6IPPEZlE2WC7QZkv6VZ3AK0tpltu3018u8MjiQKJMoM4ShnL5EHvZGl6cCVSXCmZBWRUyZuYLAQsQSZWV+DLhdQCyykqaojcq2IoJWIBIvVOQrj4xd4JxWmsyIkXZQiAhGYYxrsW3NiOEtYzdDoyxjP3rOzrUPiNBMzbsDuVXwo+QrE+U7n4IL+NKDzXcbiZsSOeVGUNqH3q8dnyVMHccXmiLJM5DnRdeaynJOqx3zzVJUtZgNxYFt5wtl0ah64tXv0nst0d70razXa0+EY0KWtTV4iXWK3qFZkFLpLMkaXyBroouaKgVKLOGzjBymQKvCspRNJInUGbI6rBGBHqzSz199XuiZl1iDAWSZwCazHSe3vWS0q8rkD4/OE10YswOtfsPrCsQtiwTy5UzeGBdgYPiFynStD+iziDgbSyQLbI9hb9NIBSbesWg3yYQik1ul/SgQBSIAv+GwP5qva5AVt/rVacGAk12st4vX60r0LvvXjbMA4HeczfzUpVYV6B2NIv+W28DgeyBl/LaygLfgKL7ZFF8W4Es/6omM9iNBXrh4RBOFnE2Fjj/EuPmAudAgShQgP9EINGIACsINARRLlAKKBAF/mWBuiDKBYpaUS5Q8CTHUy5Q8PyZFWXVvHLKT8QEj68MGUY+AJvcXOhY1mOnLWc1b2mQKwyPwCzkLyReFd0Tg+ERuapyuSkcYY2HiF1dLjwn0pubV3JV9Wgu+e3O5eFrgvZWirJ3YruLckKovKlo38X1ZUqv/3mjF+W+4aL6Lmrsfrjs/BNqV/q1jxHMrMyT/dckeWkpeo1ugPf8zwq+hm580RhBEARBEARBEARZn3/8yzrZ3IPeGAAAAABJRU5ErkJggg=="
-					alt="" />
+	<div class=" ">
 
-				<button
-					class="text-center text-md p-2 text-white font-medium duration-700 active:scale-95 bg-red-400 hover:bg-red-300 rounded-md">
-					Add Recipe
-				</button>
-			</div>
-		</div>
-
+		<NavRecipe />
 		<!-- Categories -->
-		<div class="">
-			<h1></h1>
+		<div class="mx-auto text-center">
+			<v-row class="mx-auto">
+				<v-col sm:cols="12" cols="12">
+					<div class="font-bold text-5xl  m-5  text-center ">
+						<h1 class="   ">All your favorite <span class=" text-red-500  ">recipes,</span></h1>
+						<h1 class="text-red-500 "> in one place</h1>
+					</div>
+					<!-- Categories Nav-->
+					<ul v-if="categoryList.length"
+						class="inline-flex items-center  cursor-pointer my-10 justify-center font-medium  rounded-md  gap-7  bg-red-400 px-7 py-3   w-auto text-white    ">
+
+						<li @click="selectCategory('all')"
+							:class="{ 'text-red-200 font-bold': activeCategory === 'all' }"
+							class="hover:text-red-200 duration-500">
+							All
+						</li>
+
+						<!-- Dynamic categories -->
+						<li v-for="category in categoryList" :key="category.id" @click="selectCategory(category.name)"
+							:class="{ 'text-red-200 font-bold': activeCategory === category.name }"
+							class="hover:text-red-200 duration-500">
+							{{ category.name }}
+						</li>
+					</ul>
+
+				</v-col>
+			</v-row>
 		</div>
+
+
+
+		<!-- Recipes -->
+
+		<template>
+			<div class="   mx-auto p-4">
+				<v-row v-if="recipeList.length" class="">
+					<v-col class="my-5 " v-for="(recipe, index) in recipeList" :key="index" cols="12" sm="6" md="4">
+						<router-link :to="{ name: 'DetailView', params: { id: recipe.id } }">
+							<v-card style="height: 300px;" class="  overflow-hidden">
+
+								<v-img :src="recipe.image" height="200px" class="object-cover "></v-img>
+								<v-card-text>
+									<h3 class="text-lg  text-black font-bold">{{ recipe.title }}</h3>
+									<p class="text-gray-600  line-clamp-2   ">{{ recipe.description }}</p>
+								</v-card-text>
+							</v-card>
+						</router-link>
+
+					</v-col>
+				</v-row>
+
+
+
+				<v-row v-else class="">
+					<v-col v-for="(load, index) in loadingArr" :key="index" cols="12" sm="6" md="4">
+						<v-skeleton-loader :elevation="4" color="secondary" type="card"></v-skeleton-loader>
+					</v-col>
+
+				</v-row>
+
+
+
+				<v-container v-if="pagination">
+					<v-pagination v-if="pagination.last_page > 1" v-model="pagination.current_page"
+						:length="pagination.last_page" @input="changePage"></v-pagination>
+				</v-container>
+
+			</div>
+
+
+
+		</template>
+
+
+
+
+
+
+
 	</div>
 </template>
 
 <script>
-	import RecipeAPIService from "../services/recipes/RecipeAPIService.js";
-	const RecipeService = new RecipeAPIService();
+import NavRecipe from "@/Components/NavRecipe.vue";
+import RecipeAPIService from "../services/recipes/RecipeAPIService.js";
+const RecipeService = new RecipeAPIService();
 
-	export default {
-		data() {
-			return {
-				recipeList: [],
-			};
-		},
+export default {
 
-		methods: {
-			fetchRecipeAll() {
-				RecipeService.all().then((data) => {
-					console.log(data);
-				});
+	name: "HomeView",
+	title: "HomeView",
+
+	components: {
+		NavRecipe
+	},
+
+	data() {
+		return {
+			loadingArr: [1, 2, 3, 4, 5, 6],
+			pagination: {
+				current_page: 1,
+				last_page: 1,
+				total: 0,
+				per_page: 6,
 			},
+			activeCategory: "all",
+			categoryList: [],
+			recipeList: [],
+		};
+	},
+
+	methods: {
+		fetchAll(page = 1, category = "all") {
+			let url = category === "all"
+				? `/recipes?page=${page}`
+				: `/recipes?category=${category}&page=${page}`;
+
+			RecipeService.all(url).then((response) => {
+				this.recipeList = response.data;
+				this.pagination = {
+					current_page: response.current_page,
+					last_page: response.last_page,
+					total: response.total,
+					per_page: response.per_page,
+				};
+			}).catch(error => console.error("Error fetching recipes:", error));
 		},
 
-		mounted() {
-			this.fetchRecipeAll();
+
+		fetchCategory() {
+			RecipeService.allCategory().then((cat) => {
+				this.categoryList = cat;
+			})
+
 		},
-	};
+
+		changePage(page) {
+			if (page > 0 && page <= this.pagination.last_page) {
+				this.$router.push({ query: { category: this.activeCategory, page } });
+				this.fetchAll(page, this.activeCategory);
+			}
+		},
+
+
+		selectCategory(category) {
+
+			this.$router.push({ query: { category: category == "all" ? undefined : category } })
+			this.activeCategory = category;
+			this.fetchAll(category);
+
+		}
+
+
+
+
+
+
+	},
+
+	created() {
+		const catUrl = this.$route.query.category || "all";
+		const pageUrl = parseInt(this.$route.query.page) || 1;
+
+		this.activeCategory = catUrl;
+		this.fetchAll(pageUrl, catUrl);
+		this.fetchCategory();
+	}
+};
 </script>
